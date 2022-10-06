@@ -19,7 +19,7 @@ public class ZipFileTest {
     ClassLoader cl = ZipFileTest.class.getClassLoader();
 
     @Test
-    public void ZipTest() throws Exception {
+    public void zipTest() throws Exception {
         InputStream is = cl.getResourceAsStream("peoples.zip");
         ZipFile zipfile = new ZipFile("src/test/resources/peoples.zip");
         ZipInputStream zis = new ZipInputStream(is);

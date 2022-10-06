@@ -1,12 +1,15 @@
 package liliapaper.com;
 
 import com.codeborne.selenide.Configuration;
+import com.codeborne.xlstest.XLS;
+import com.opencsv.CSVReader;
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.zip.InflaterInputStream;
 
 import static com.codeborne.selenide.Condition.text;
@@ -29,9 +32,12 @@ public class SelenideFileTest {
         File file = $("a[title='Скачать прайс-лист в формате Microsoft Excel']").download();
         InputStream is = new FileInputStream(file);
         try{
-        byte[] filesource = is.readAllBytes();
-        String filecontent = new String(filesource, StandardCharsets.UTF_8);
-        assertThat(filecontent).contains("OOO Строймаркет");
+            XLS xls = new XLS(is);
+            assertThat(xls.excel.getSheetAt(0)
+                    .getRow(12)
+                    .getCell(1)
+                    .getStringCellValue())
+                    .isEqualTo("Технические требования к оригинал - макетам для офсетной печати");
     }finally {
             is.close();
         }
@@ -42,9 +48,12 @@ public class SelenideFileTest {
         open("http://www.24copy.ru/skachat-prajjs.html");
         File file = $("a[title='Скачать прайс-лист в формате Microsoft Excel']").download();
         try(InputStream is = new FileInputStream(file)){
-            byte[] filesource = is.readAllBytes();
-            String filecontent = new String(filesource, StandardCharsets.UTF_8);
-            assertThat(filecontent).contains("OOO Строймаркет");
+            XLS xls = new XLS(is);
+            assertThat(xls.excel.getSheetAt(0)
+                    .getRow(12)
+                    .getCell(1)
+                    .getStringCellValue())
+                    .isEqualTo("Технические требования к оригинал - макетам для офсетной печати");
         }
     }
 
