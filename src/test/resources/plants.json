@@ -1,0 +1,14 @@
+{
+  "name": "Ficus elastica",
+  "lights": [
+    "slight shading",
+    "bright diffused light"
+  ],
+  "family": "Mulberry",
+  "soil": "nitrogen",
+  "pests": {
+    "isTrue": true,
+    "insects": "spider mites",
+    "micro": "viruses"
+  }
+}
