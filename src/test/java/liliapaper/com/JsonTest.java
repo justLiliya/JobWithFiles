@@ -11,7 +11,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class JsonTest {
 
     ClassLoader cl = JsonTest.class.getClassLoader();
-    String jsonFile = "plants.json";
 
     @Test
     public void jsonPlantsTest() throws Exception {
